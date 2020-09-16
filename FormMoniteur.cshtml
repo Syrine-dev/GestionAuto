@@ -1,0 +1,41 @@
+﻿
+@model GestionAutoEcole.Service.Moniteur
+
+@{ ViewData["titre"] = "Saisie d'un Moniteur"; }
+<p></p>
+<div class="container col-md-8 col-md-offset-2">
+    <div class="panel-primary">
+        <div class="panel-heading">Saisie d'un Moniteur</div>
+        <p>
+        </p>
+        <div class="panel-body">
+
+            <form method="post" asp-action="SaveMoniteur">
+                <div class="form-group">
+                    <label class="control-label">Nom </label>
+                    <input type="text" name="NomMoniteur" value="@Model.NomMoniteur" class="form-control" />
+                    @Html.ValidationMessageFor(p => p.NomMoniteur, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Numero De Telephone</label>
+                    <input type="text" name="Telephone" value="@Model.Telephone" class="form-control" />
+                    @Html.ValidationMessageFor(p => p.Telephone, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Adresse</label>
+                    <input type="text" name="Adresse" value="@Model.Adresse" class="form-control" />
+                    @Html.ValidationMessageFor(p => p.Adresse, "", new { @class = "text-danger" })
+                </div>
+
+
+
+                <div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

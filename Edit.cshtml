@@ -1,0 +1,120 @@
+﻿ 
+@model GestionAutoEcole.Service.Client
+
+@{ 
+    ViewData["titre"] = "Edit d'un Client";
+}
+ <p></p>
+ <div class="container col-md-8 col-md-offset-2">
+     <div class="panel panel-warning">
+         <h2 class="text-center">FICHE DE MODIFICATION</h2> <br /><hr />
+         <div class="panel-body">
+             <form asp-action="Save" method="post">
+                 <div class="form-group">
+                     @Html.HiddenFor(p => p.ClientID, new { @class = "form-control" })
+                     @Html.ValidationMessageFor(p => p.ClientID, "", new { @class = "text-danger" })
+                 </div>
+                 <div class="form-group">
+                     <label class="control-label">CIN</label>
+                     <input type="text" name="CIN" value="@Model.CIN" class="form-control" />
+                     @Html.ValidationMessageFor(p => p.CIN, "", new { @class = "text-danger" })
+                 </div>
+
+                 <div class="form-group">
+                     <label class="control-label">Nom et prénom</label>
+                     <input type="text" name="Nom" value="@Model.Nom" class="form-control" />
+                     @Html.ValidationMessageFor(p => p.Nom, "", new { @class = "text-danger" })
+                 </div>
+
+                 <div class="form-group">
+                     <label class="control-label">Date de naissance :</label>
+                     <input type="text" name="Age" value="@Model.Age" class="form-control" />
+                     @Html.ValidationMessageFor(p => p.Age, "", new { @class = "text-danger" })
+                 </div>
+                 <div class="form-group">
+                     <label class="control-label">Telephone :</label>
+                     <input type="text" name="Tel" value="@Model.Tel" class="form-control" />
+                     @Html.ValidationMessageFor(p => p.Tel, "", new { @class = "text-danger" })
+                 </div>
+                 <div class="form-group">
+                     <label class="control-label">Sexe :</label>
+                     <input type="text" name="Sexe" value="@Model.Sexe" class="form-control" />
+                     @Html.ValidationMessageFor(p => p.Sexe, "", new { @class = "text-danger" })
+                 </div>
+
+                 <div class="form-group">
+                     <label class="control-label">Adresse</label>
+                     <input type="text" name="Ville" value="@Model.Ville" class="form-control" />
+                     @Html.ValidationMessageFor(p => p.Ville, "", new { @class = "text-danger" })
+                 </div>
+
+                 <div class="form-group">
+                     <label class="control-label">Categorie Permis :</label>
+                     <input type="text" name="Categoriee" value="@Model.Categoriee" class="form-control" />
+                     @Html.ValidationMessageFor(p => p.Categoriee, "", new { @class = "text-danger" })
+                 </div>
+                 <div class="form-group">
+                     <label class="control-label">Moniteur</label>
+                     <select name="MoniteurID" class="form-control">
+                         <option value="@Model.MoniteurID" style="color:orangered;">@Model.Moniteur.NomMoniteur</option>
+                         @{ foreach (var c in ViewBag.Moniteurs)
+                             {
+                                 if (!(@c.MoniteurID == @Model.MoniteurID))
+                                 {
+                 <option value="@c.MoniteurID">@c.NomMoniteur</option> }
+                             }
+                 @Html.ValidationMessageFor(p => p.Moniteur.NomMoniteur, "", new { @class = "text-danger" }) }
+
+                     </select>
+                 </div>
+                 <div class="form-group">
+                     @Html.HiddenFor(p => p.Nbrheure, new { @class = "form-control" })
+                     @Html.ValidationMessageFor(p => p.Nbrheure, "", new { @class = "text-danger" })
+                 </div>
+                 <div class="form-group">
+                     @Html.HiddenFor(p => p.DateExamen, new { @class = "form-control" })
+                     @Html.ValidationMessageFor(p => p.DateExamen, "", new { @class = "text-danger" })
+                 </div>
+                 <div class="form-group">
+                     @Html.HiddenFor(p => p.MontantTotale, new { @class = "form-control" })
+                     @Html.ValidationMessageFor(p => p.MontantTotale, "", new { @class = "text-danger" })
+                 </div>
+                 <div class="form-group">
+                     @Html.HiddenFor(p => p.MontantAjouter, new { @class = "form-control" })
+                     @Html.ValidationMessageFor(p => p.MontantAjouter, "", new { @class = "text-danger" })
+                 </div>
+                 <div class="form-group">
+                     @Html.HiddenFor(p => p.paie, new { @class = "form-control" })
+                     @Html.ValidationMessageFor(p => p.paie, "", new { @class = "text-danger" })
+                 </div>
+
+                 <div class="form-group">
+                     @Html.HiddenFor(p => p.ProchaineSeance, new { @class = "form-control" })
+                     @Html.ValidationMessageFor(p => p.ProchaineSeance, "", new { @class = "text-danger" })
+                 </div>
+                 <div class="form-group">
+                     @Html.HiddenFor(p => p.HistoriquePaiement, new { @class = "form-control" })
+                     @Html.ValidationMessageFor(p => p.HistoriquePaiement, "", new { @class = "text-danger" })
+                 </div>
+                 <div class="form-group">
+                     @Html.HiddenFor(p => p.HistoriqueDate, new { @class = "form-control" })
+                     @Html.ValidationMessageFor(p => p.HistoriqueDate, "", new { @class = "text-danger" })
+                 </div>
+                 <div class="form-group">
+                     @Html.HiddenFor(p => p.HistoriqueSeance, new { @class = "form-control" })
+                     @Html.ValidationMessageFor(p => p.HistoriqueSeance, "", new { @class = "text-danger" })
+                 </div>
+                 <div>
+                     <button type="submit" class="btn btn-warning" value="update" name="update">Modifier</button>
+
+                 </div>
+
+             </form>
+
+
+
+         </div>
+
+     </div>
+ </div>
+

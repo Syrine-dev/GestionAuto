@@ -1,0 +1,114 @@
+﻿
+
+@model IEnumerable<GestionAutoEcole.Service.Client>
+
+
+@{ ViewData["titre"] = "LISTE DES SEANCES"; }
+
+<style>
+    .back-voiture {
+        background-size: 125% 100%;
+        background-image: url('https://s3-eu-west-1.amazonaws.com/prestatairescatalogue/prestataires/avatars/000/000/542/large/banner1.jpg?1517922029');
+    }
+
+    .title {
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 3.2em;
+        line-height: 48px;
+        padding-bottom: 48px;
+        color: #5543ca;
+        background: #5543ca;
+        background: -moz-linear-gradient(left,#f4524d 0%,#5543ca 100%) !important;
+        background: -webkit-linear-gradient(left,#f4524d 0%,#5543ca 100%) !important;
+        background: linear-gradient(to right,#f4524d 0%,#5543ca 100%) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+    }
+
+
+
+    th {
+        //color: #0094ff;
+    }
+</style>
+
+
+<div>
+    <div class="back-voiture">
+        <div class="panel-heading ">
+            <div style="text-align: center;"><h2 class="title">LISTE DES SEANCES</h2></div>
+        </div>
+        <div class="panel-body">
+
+
+            <div class="container">
+                <form method="get" asp-action="Cours" class="form-inline">
+                    <label>Nom du moniteur :</label>
+                    <input type="search" class="form-control mr-sm-2" name="motCle" value="@ViewBag.motCle" placeholder="Chercher" aria-label="Search" />
+                    <button type="submit" class="btn btn-primary" style=" background-color: #000; background-image: linear-gradient(125deg,#a72879,#064497); color: #fff;  width:100px;">Chercher</button>
+                </form>
+            </div>
+
+            <br />
+
+            <table class="table table-striped">
+                <tr>
+                    <th>№</th>
+                    <th>Nom et Prénom</th>
+                    <th>Nombres des heures </th>
+                    <th>Prochaine seance</th>
+                    <th>Nom du moniteur</th>
+                    <th>Date examen</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @{ //Lazor syntax
+                    foreach (var p in Model)
+                    {
+        <tr>
+
+            <td>@p.ClientID</td>
+            <td>@p.Nom</td>
+            <td>@p.Nbrheure</td>
+            <td>@p.ProchaineSeance</td>
+            <td>@p.Moniteur.NomMoniteur</td>
+            <td>
+                @{ if (!(@p.DateExamen.Date.ToString().Equals("01/01/0001 00:00:00")))
+                                    { @p.DateExamen}
+
+                                else
+                                {
+                                    string text = "Aucun";
+                @Html.DisplayFor(m => text) <br /> } }
+
+
+            </td>
+            <td><a asp-action="Confirmer" asp-route-id="@p.ClientID" class="btn btn-info">Changer la date du séance</a></td>
+            <td><a asp-action="Presence" asp-route-id="@p.ClientID" class="btn btn-primary">Present(e)</a></td>
+
+
+
+        </tr>
+ } }
+            </table>
+            <div>
+                <ul class="nav nav-pills">
+                    @{ for (int i = 0; i < ViewBag.totalPages; i++)
+                        {
+                            string className = "";
+                            if (i == ViewBag.currentPage)
+                            {
+                                className = "active";
+                            }
+
+            <li class="@className">
+                <a asp-action="Cours" asp-route-page="@i" asp-route-motCle="@ViewBag.motCle">@i</a>
+            </li>
+ } }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

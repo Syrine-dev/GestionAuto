@@ -1,0 +1,143 @@
+﻿@model IEnumerable<GestionAutoEcole.Service.Client>
+
+<p></p>
+<style>
+    .back-voiture {
+        background-size: 125% 100%;
+        background-image: url('https://s3-eu-west-1.amazonaws.com/prestatairescatalogue/prestataires/avatars/000/000/542/large/banner1.jpg?1517922029');
+    }
+    .title {
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 3.2em;
+        line-height: 48px;
+        padding-bottom: 48px;
+        color: #5543ca;
+        background: #5543ca;
+        background: -moz-linear-gradient(left,#f4524d 0%,#5543ca 100%) !important;
+        background: -webkit-linear-gradient(left,#f4524d 0%,#5543ca 100%) !important;
+        background: linear-gradient(to right,#f4524d 0%,#5543ca 100%) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+    }
+     
+        
+    
+    th {
+        
+        //color: #0094ff;
+    }
+</style>
+
+<div >
+    <div class="back-voiture">
+        <div class="panel-heading ">
+            <div class="container" style="text-align:left;"><a asp-action="FormClient" class="btn btn-primary" style=" background-color: #000; background-image: linear-gradient(125deg,#a72879,#064497); color: #fff;  width:150px;" >Ajouter Client</a></div>
+            <div style=" margin-top: -28px; text-align: center; margin-bottom: -40px; "><h2 class="title">LISTE DES CLIENTS</h2></div>
+        </div>
+        <div class="panel-body">
+
+            <div class="container">
+                <form method="get" asp-action="Index" class="form-inline">
+                    <label>Nom du moniteur :</label>
+                    <input type="search" class="form-control mr-sm-2" name="motCle" value="@ViewBag.motCle" placeholder="Chercher" aria-label="Search"  />
+                    <button type="submit" class="btn btn-primary" style=" background-color: #000; background-image: linear-gradient(125deg,#a72879,#064497); color: #fff;  width:100px;">Chercher</button>
+                </form>
+            </div>
+
+            <br />
+
+            <table class="table table-striped">
+                <tr>
+                    <th>№</th>
+                    <th>CIN</th>
+                    <th>Nom et prénom </th>
+                    <th>Date de naissance</th>
+                    <th>Sexe</th>
+                    <th>Telephone</th>
+                    <th>Adresse</th>
+                    <th>Catégorie Permis</th>
+                    <th>Moniteur</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @{ //Lazor syntax
+                    foreach (var p in Model)
+                    {
+            <tr>
+                <td>@p.ClientID</td>
+                <td>@p.CIN</td>
+                <td>@p.Nom</td>
+                <td>@p.Age.Date.ToShortDateString()</td>
+                <td>@p.Sexe</td>
+                <td>@p.Tel</td>
+                <td>@p.Ville</td>
+                <td>@p.Categoriee</td>
+                <td>@p.Moniteur.NomMoniteur</td>
+                
+                <td><a asp-action="Delete" asp-route-id="@p.ClientID" class="btn btn-danger" onclick="return confirm('Vous etes sure ?? ')">Suprimer</a></td>
+                <td><a asp-action="Edit" asp-route-id="@p.ClientID" class="btn btn-info">Modifier</a></td>
+                <td><a  data-placement="top" title="@p.DateExamen"  data-target="#exampleModalLong" data-toggle="modal" type="button"  class="btn btn-primary">Examen</a></td>
+            </tr>
+  <!-- Modal Login -->
+                        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form>
+                                        <div class="modal-body">
+                                            <div id="contact" class="container-fluid bg-grey">
+                                                <h3>Contact de l'administration</h3>
+                                                <img src="~/images/login2.png" class="w3-image w3-greyscale-min" style="width:30%">
+                                                <div class="form-group">
+                                                    <label class="control-label">Nom de utilisateur</label>
+                                                    <input type="text" name="User" value="" class="form-control" placeholder="Nom" pattern="admin" required />
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Mot de passe </label>
+                                                    <input type="password" name="password" value="" class="form-control" placeholder="Mot de passe" pattern="123" title="verifier le mot de passe" required />
+
+                                                </div>
+                                                
+                                                <input type="submit" value="Connecter " class="btn btn-danger" asp-action="Examen" asp-route-id="@p.ClientID">
+
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div> }}
+            </table>
+            
+
+            <div>
+                <ul class="nav nav-pills">
+                    @{ for (int i = 0; i < ViewBag.totalPages; i++)
+                        {
+                            string className = "";
+                            if (i == ViewBag.currentPage)
+                            {
+                                className = "active";
+                            }
+
+            <li class="@className">
+                <a asp-action="Index" asp-route-page="@i" asp-route-motCle="@ViewBag.motCle">@i</a>
+            </li> } }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

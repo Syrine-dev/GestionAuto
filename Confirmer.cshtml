@@ -1,0 +1,199 @@
+﻿
+@model GestionAutoEcole.Service.Client
+
+@{ ViewData["titre"] = "Edit d'un Client"; }
+<p></p>
+<div class="container col-md-8 col-md-offset-2">
+    <div class="panel panel-warning">
+        <h2 class="text-center">FICHE DE SEANCE</h2> <hr />
+        <div class="panel-body">
+            <form asp-action="SaveSeance" method="post">
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.ClientID, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.ClientID, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.CIN, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.CIN, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.Categoriee, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Categoriee, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.MontantTotale, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.MontantTotale, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.MontantAjouter, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.MontantAjouter, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.Sexe, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Sexe, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.Tel, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Tel, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.Nom, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Nom, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.Age, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Age, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.Ville, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Ville, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.Nbrheure, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Nbrheure, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.paie, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.paie, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.HistoriquePaiement, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.HistoriquePaiement, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.HistoriqueDate, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.HistoriqueDate, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.HistoriqueSeance, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.HistoriqueSeance, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.DateExamen, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.DateExamen, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <h3>Prochaine seance : </h3>
+                    <div class="col-md-10">
+                        <div class="input-group" id="datetimepicker">
+                            @Html.EditorFor(p => p.ProchaineSeance, new { htmlAttributes = new { @class = "form-control" } })
+
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ProchaineSeance, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.MoniteurID, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.MoniteurID, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div>
+                    <button type="submit" class="btn btn-warning" value="update" name="update">Confirmer</button>
+
+                </div>
+
+            </form>
+
+            <div class="form-group" style="text-align: center;margin-top:15%;">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        CARNET DES SEANCES
+                    </button>
+                </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+        $(document).ready(function ()
+        {
+            $("#datetimepicker").datetimepicker(
+                {
+                    defaultDate: '@Model.ProchaineSeance',
+                    showTodayButton: true,
+                    format: 'YYYY-MM-DD HH:mm',
+                    showClose: true,
+                    showClear: true,
+                    toolbarPlacement: 'top',
+                    stepping: 15
+                });
+        });
+</script>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel" style="text-align: center;" >CARNET DES SEANCES</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="container col-md-8 col-md-offset-2" style="margin-left: 0%;width: 100%;">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            <h4>Nom client : @Model.Nom </h4>
+                            <h4>Telephone : @Model.Tel </h4>
+                            <!--<h4 style=" margin-top: -60px;margin-left: 261px;">Nom moniteur : @Model.Moniteur.NomMoniteur</h4>
+                                <h4 style=" margin-left: 261px;">Nombres d'heures : @Model.Nbrheure</h4>
+                            -->
+                        </div>
+                        <div class="panel-body">
+
+                            <table class="col-md-10 col-md-offset-1 col-xs-12" >
+
+                                <tr>
+                                    
+                                    <th style="text-align:center;">Les dates des seances</th>
+                                </tr>
+
+
+                                <tr>
+                                    
+                                    <td style="text-align:center;">
+                                        <label style="margin-bottom: 516px;text-align:center;" >
+                                            @{ var delimiterChars1 = ".";
+                                                string text1 =   Model.HistoriqueSeance+ ".";
+
+                                                string[] lignes1 = text1.Split(delimiterChars1); }
+                                            @foreach (var ligne1 in lignes1)
+
+                                            {
+
+                                @Html.DisplayFor(m => ligne1) <br /><br />}
+
+                                        </label>
+
+                                    </td>
+
+                                    
+                                </tr>
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>

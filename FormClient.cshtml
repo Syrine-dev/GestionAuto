@@ -1,0 +1,181 @@
+﻿ 
+@model GestionAutoEcole.Service.Client
+
+@{ 
+    ViewData["titre"] = "Fiche d'inscription";
+}
+ <style>
+     .contact-form .submit-btn {
+         display: inline-block;
+         background-color: #000;
+         background-image: linear-gradient(125deg,#a72879,#064497);
+         color: #fff;
+         text-transform: uppercase;
+         letter-spacing: 2px;
+         font-size: 16px;
+         padding: 8px 16px;
+         border: none;
+         width: 200px;
+         cursor: pointer;
+     }
+      .title {
+         text-align: center;
+         text-transform: uppercase;
+         letter-spacing: 3px;
+         font-size: 3.2em;
+         line-height: 48px;
+         padding-bottom: 48px;
+         color: #5543ca;
+         background: #5543ca;
+         background: -moz-linear-gradient(left,#f4524d 0%,#5543ca 100%) !important;
+         background: -webkit-linear-gradient(left,#f4524d 0%,#5543ca 100%) !important;
+         background: linear-gradient(to right,#f4524d 0%,#5543ca 100%) !important;
+         -webkit-background-clip: text !important;
+         -webkit-text-fill-color: transparent !important;
+     }
+     .contact-form .form-field {
+         position: relative;
+         margin: 32px 0;
+     }
+
+     .contact-form .input-text {
+         display: block;
+         width: 100%;
+         height: 36px;
+         border-width: 0 0 2px 0;
+         border-color: #5543ca;
+         font-size: 18px;
+         line-height: 26px;
+         font-weight: 400;
+         padding-left: 150px;
+     }
+
+         .contact-form .input-text:focus {
+             outline: none;
+         }
+
+             .contact-form .input-text:focus + .label,
+             .contact-form .input-text.not-empty + .label {
+                 -webkit-transform: translateY(-24px);
+                 transform: translateY(-24px);
+             }
+
+     .contact-form .label {
+         position: absolute;
+         left: 20px;
+         bottom: 11px;
+         font-size: 18px;
+         line-height: 26px;
+         font-weight: 400;
+         color: #5543ca;
+         cursor: text;
+         transition: -webkit-transform .2s ease-in-out;
+         transition: transform .2s ease-in-out;
+         transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out;
+     }
+ </style>
+ <div class="container col-md-10 col-md-offset-1">
+     <div class="panel panel-warning">
+         <h2 class="title">FICHE D'INSCRIPTION</h2> <hr />
+         <div class="panel-body">
+             <form method="post" asp-action="Save" class="contact-form row">
+
+                 <div class="form-field col-lg-8">
+                     <input id="CIN" class="input-text js-input" type="text" name="CIN" value="@Model.CIN" required>
+                     <label class="label" for="CIN">CIN</label>
+                     @Html.ValidationMessageFor(p => p.CIN, "", new { @class = "text-danger" })
+                 </div>
+                 <div class="form-field col-lg-8">
+                     <input id="Nom" class="input-text js-input" type="text" name="Nom" value="@Model.Nom" required>
+                     <label class="label" for="Nom">Nom et prénom</label>
+                     @Html.ValidationMessageFor(p => p.Nom, "", new { @class = "text-danger" })
+                 </div>
+                 <div>
+                     <div class="form-field col-lg-6" style="margin-top: 54px;">
+                         <label class="label " for="Age">Date de naissance</label>
+                         @Html.ValidationMessageFor(p => p.Age, "", new { @class = "text-danger" })
+                     </div>
+                     <div class="form-field col-lg-6" style="margin-top: 0px;">
+                         <input id="Age" class="input-text js-input" type="date" name="Age" value="@Model.Age" required>
+                         @Html.ValidationMessageFor(p => p.Age, "", new { @class = "text-danger" })
+                     </div>
+                 </div>
+                 <div class="form-field col-lg-9" style="margin-top: 0px;">
+                     <input id="Tel" class="input-text js-input" type="text" name="Tel" value="@Model.Tel" required>
+                     <label class="label" for="Tel">Telephone</label>
+                     @Html.ValidationMessageFor(p => p.Tel, "", new { @class = "text-danger" })
+                 </div>
+                 <div class="form-check">
+                     <div class="form-field col-lg-4" style="margin-top: 60px;">
+                         <label class="label "> Sexe :</label>
+                     </div>
+
+                     <div class="form-field col-lg-4" style="margin-top: 20px;">
+                         <input class="form-check-input" type="radio" name="Sexe" id="exampleRadios1" value="Femme" value="@Model.Sexe" checked>
+                         <label class="form-check-label" for="exampleRadios1">  Femme  </label>
+                     </div>
+                     <div class="form-field col-lg-4" style="margin-top: 20px;">
+                         <input class="form-check-input" type="radio" name="Sexe" value="Homme" value="@Model.Sexe">
+                         <label class="form-check-label" for="exampleRadios2">  Homme  </label>
+                     </div>
+                 </div>
+
+                 <div class="form-field col-lg-9" style=" margin: 0px;">
+                     <input id="Ville" class="input-text js-input" type="text" name="Ville" value="@Model.Ville" required>
+                     <label class="label" for="Ville">Adresse</label>
+                     @Html.ValidationMessageFor(p => p.Ville, "", new { @class = "text-danger" })
+                 </div>
+
+                
+                 <br />
+
+                 <div class="form-field col-lg-12" style=" margin-top: 90px;">
+                     <label class="label "> Categorie de permis :</label>
+                 </div>
+                 <div class="form-check">
+                     <div class="form-field col-lg-3" style="margin-top: -10px;">
+                         <input class="form-check-input" type="radio" name="Categoriee" id="exampleRadios1" value="A" value="@Model.Categoriee" checked>
+                         <label class="form-check-label" for="exampleRadios11">  A : Toutes motos  </label>
+                     </div>
+                     <div class="form-field col-lg-3" style="margin-top: -10px;">
+                         <input class="form-check-input" type="radio" name="Categoriee" value="B" value="@Model.Categoriee">
+                         <label class="form-check-label" for="exampleRadios22">  B : Voitures particulières </label>
+                     </div>
+                     <div class="form-field col-lg-3" style="margin-top: -10px;">
+                         <input class="form-check-input" type="radio" name="Categoriee" value="C" value="@Model.Categoriee">
+                         <label class="form-check-label" for="exampleRadios33">C : Poids lourds </label> <br /><label>plus de 3.5 tonnes</label>
+                     </div>
+                     <div class="form-field col-lg-3" style="margin-top: -10px;">
+                         <input class="form-check-input" type="radio" name="Categoriee" value="D" value="@Model.Categoriee">
+                         <label class="form-check-label" for="exampleRadios44">  D : Autobus </label>
+                     </div>
+                 </div>
+                 <br />
+                 
+                 <div class="form-field col-lg-6" style=" margin-top:78px;">
+                     <label class="label">Moniteur</label>
+                 </div>
+                 <div class="form-field col-lg-6">
+                     <select name="MoniteurID" class="form-control input-text js-input" >
+                         @{ foreach (var c in ViewBag.Moniteurs)
+                             {
+                 <option value="@c.MoniteurID">@c.NomMoniteur</option>
+ } }
+                     </select>
+                 </div>
+
+                 
+
+                 <div class="form-field col-lg-12 " style="text-align: center;">
+                     <button type="submit" class="submit-btn">Enregister</button>
+
+                 </div>
+
+             </form>
+
+
+         </div>
+
+     </div>
+ </div>
+

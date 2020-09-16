@@ -1,0 +1,63 @@
+﻿@model IEnumerable<GestionAutoEcole.Service.Moniteur>
+
+
+<p></p>
+
+<div class="container">
+    <a asp-action="FormMoniteur">Nouveau Moniteur</a>
+
+</div>
+
+<div class="container col-md-8 col-md-offset-2">
+    <div class="btn-primary">Liste des Moniteurs </div>
+    <div class="panel-body">
+        <div class="container">
+            <form method="get" asp-action="Moniteurs" class="form-inline">
+                <label>Nom du moniteur :</label>
+                <input type="search" class="form-control mr-sm-2" name="motCle" value="@ViewBag.motCle" placeholder="Chercher" aria-label="Search" />
+                <button type="submit" class="btn btn-primary">Chercher</button>
+            </form>
+        </div>
+
+        <br />
+
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>N Telephone</th>
+                <th>Adresse</th>
+            </tr>
+            @{ //Lazor syntax
+                foreach (var p in Model)
+                {
+    <tr>
+        <td>@p.MoniteurID</td>
+        <td>@p.NomMoniteur</td>
+        <td>@p.Telephone</td>
+        <td>@p.Adresse</td>
+        <td><a asp-action="DeleteMoniteur" asp-route-id="@p.MoniteurID" class="btn btn-danger" onclick="return confirm('Vous etes sure ?? ')">Suprimer</a></td>
+        <td><a asp-action="EditMoniteur" asp-route-id="@p.MoniteurID" class="btn btn-success">Edit</a></td>
+        <td> <a asp-action="ClientsDetails" asp-route-id="@p.MoniteurID" asp-controller="Produit"> DetailsClients</a> </td>
+    </tr>
+ } }
+        </table>
+        <div>
+            <ul class="nav nav-pills">
+                @{ for (int i = 0; i < ViewBag.totalPages; i++)
+                    {
+                        string className = "";
+                        if (i == ViewBag.currentPage)
+                        {
+                            className = "active";
+                        }
+
+        <li class="@className">
+            <a asp-action="Moniteurs" asp-route-page="@i" asp-route-motCle="@ViewBag.motCle">@i</a>
+        </li>
+ } }
+            </ul>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,126 @@
+﻿
+@model GestionAutoEcole.Service.Client
+
+@{ ViewData["titre"] = "Examej d'un Client"; }
+<p></p>
+<div class="container col-md-8 col-md-offset-2">
+    <div class="panel panel-warning">
+        <h2 class="text-center">FICHE D'EXAMEN</h2> <hr />
+        <div class="panel-body">
+            <form asp-action="Save" method="post">
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.ClientID, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.ClientID, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.CIN, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.CIN, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.Categoriee, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Categoriee, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.MontantTotale, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.MontantTotale, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.MontantAjouter, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.MontantAjouter, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.Sexe, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Sexe, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.Tel, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Tel, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.Nom, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Nom, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.Age, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Age, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.Ville, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Ville, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.Nbrheure, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.Nbrheure, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.paie, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.paie, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.HistoriquePaiement, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.HistoriquePaiement, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.HistoriqueDate, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.HistoriqueDate, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.HistoriqueSeance, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.HistoriqueSeance, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.ProchaineSeance, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.ProchaineSeance, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <h3>Date examen: </h3>
+                    <div class="col-md-10">
+                        <div class="input-group" id="datetimepicker">
+                            @Html.EditorFor(p => p.DateExamen, new { htmlAttributes = new { @class = "form-control" } })
+
+                        </div>
+                        @Html.ValidationMessageFor(model => model.DateExamen, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(p => p.MoniteurID, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(p => p.MoniteurID, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div>
+                    <button type="submit" class="btn btn-warning" value="update" name="update">Confirmer</button>
+
+                </div>
+
+            </form>
+
+            
+
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+        $(document).ready(function ()
+        {
+            $("#datetimepicker").datetimepicker(
+                {
+                    defaultDate: '@Model.DateExamen',
+                    showTodayButton: true,
+                    format: 'YYYY-MM-DD HH:mm',
+                    showClose: true,
+                    showClear: true,
+                    toolbarPlacement: 'top',
+                    stepping: 15
+                });
+        });
+</script>
+

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<GestionAutoEcole.Service.Client>
+<p></p>
+<div class="container col-md-8 col-md-offset-2">
+    <table style="width:100%;" class="table">
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            
+        </tr>
+        @{
+            foreach (var v in Model)
+            {
+                <tr>
+                    <td>@v.ClientID</td>
+                    <td>@v.Nom</td>
+                    
+
+                </tr>
+            }
+        }
+    </table>
+
+
+</div>
